@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -23,6 +24,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  StreamController<double> _controller = StreamController();
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +36,23 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-
+            MaterialButton(splashColor: Colors.yellow[800],
+              child: Text("Subscribe"),
+              color: Colors.yellowAccent,
+              onPressed: () {
+                Stream _stream = _controller.stream;
+                _stream.listen((event) {
+                  print("Value Of Controller : $event");
+                });
+              },
+            ),
+            MaterialButton(splashColor: Colors.lightBlue[800],
+              child: Text("Send Value"),
+              color: Colors.lightBlueAccent,
+              onPressed: () {
+                _controller.add(12.5);
+              },
+            ),
           ],
         ),
       ),
