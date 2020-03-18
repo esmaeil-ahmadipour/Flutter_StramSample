@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -26,6 +28,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   StreamController<double> _controller = StreamController<double>.broadcast();
   StreamSubscription <double> streamSubscription ;
+  double x= 0.0;
 
   @override
   Widget build(BuildContext context) {
@@ -41,17 +44,16 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Text("Subscribe"),
               color: Colors.yellowAccent,
               onPressed: () {
-                Stream _stream = _controller.stream;
-                streamSubscription=_stream.listen((event) {
-                  print("Value Of Controller : $event");
-                });
+             streamSubscription= getDelayedRandomValue().listen((event) {
+                print("Value Is : $event");
+              });
               },
             ),
             MaterialButton(splashColor: Colors.lightBlue[800],
               child: Text("Send Value"),
               color: Colors.lightBlueAccent,
               onPressed: () {
-                _controller.add(12.5);
+                _controller.add(x++);
               },
             ),
             MaterialButton(splashColor: Colors.red[800],
@@ -66,5 +68,13 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
     );
+  }
+
+  Stream<double> getDelayedRandomValue() async* {
+    var randomValue = Random();
+    while (true) {
+      await Future.delayed(Duration(seconds: 1));
+      yield x+(randomValue.nextDouble());
+    }
   }
 }
