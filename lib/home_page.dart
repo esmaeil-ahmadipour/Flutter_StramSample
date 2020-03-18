@@ -25,6 +25,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   StreamController<double> _controller = StreamController();
+  StreamSubscription <double> streamSubscription ;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
               color: Colors.yellowAccent,
               onPressed: () {
                 Stream _stream = _controller.stream;
-                _stream.listen((event) {
+                streamSubscription=_stream.listen((event) {
                   print("Value Of Controller : $event");
                 });
               },
@@ -53,6 +54,14 @@ class _MyHomePageState extends State<MyHomePage> {
                 _controller.add(12.5);
               },
             ),
+            MaterialButton(splashColor: Colors.red[800],
+              child: Text("Unsubscribtion"),
+              color: Colors.red,
+              onPressed: () {
+              streamSubscription?.cancel();
+              },
+            ),
+
           ],
         ),
       ),
