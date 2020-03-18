@@ -24,7 +24,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  StreamController<double> _controller = StreamController();
+  StreamController<double> _controller = StreamController<double>.broadcast();
   StreamSubscription <double> streamSubscription ;
 
   @override
