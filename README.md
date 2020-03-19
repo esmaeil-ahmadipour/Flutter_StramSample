@@ -1,6 +1,8 @@
-# flutterrxsample
+# Flutter_StramSample
 
-A Sample  Flutter application.
+A Simple Application with Flutter.
+
+![alt text](https://i.ibb.co/mcp7DJq/Flutter-Stram-Sample.jpg)
 
 ## Getting Started
 
